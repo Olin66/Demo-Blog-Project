@@ -1,4 +1,4 @@
-package sustech.blog;
+package sustech.blog.utils;
 
 import com.baomidou.mybatisplus.generator.AutoGenerator;
 
