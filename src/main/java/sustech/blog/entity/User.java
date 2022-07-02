@@ -13,6 +13,9 @@ import java.io.Serializable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+
 @Data
 @EqualsAndHashCode(callSuper = false)
 @TableName("t_user")
@@ -25,6 +28,7 @@ public class User implements Serializable {
     private Integer id;
 
     @TableField("username")
+    @NotBlank(message = "The username can not be left empty!")
     private String username;
 
     @TableField("pwd")
@@ -34,6 +38,8 @@ public class User implements Serializable {
     private String avatar;
 
     @TableField("email")
+    @NotBlank(message = "The email  can not be left empty!")
+    @Email
     private String email;
 
     @TableField("status")
