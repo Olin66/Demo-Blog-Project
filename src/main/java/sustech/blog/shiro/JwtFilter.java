@@ -1,6 +1,5 @@
 package sustech.blog.shiro;
 
-import cn.hutool.http.server.HttpServerRequest;
 import cn.hutool.json.JSONUtil;
 import io.jsonwebtoken.Claims;
 import org.apache.shiro.authc.AuthenticationException;
