@@ -11,6 +11,17 @@ public class JsonResult<E> implements Serializable {
         super();
     }
 
+    public JsonResult(Integer state, String message){
+        super();
+        this.state = state;
+        this.message = message;
+    }
+
+    public JsonResult(String message) {
+        super();
+        this.message = message;
+    }
+
     public JsonResult(Integer state) {
         super();
         this.state = state;
