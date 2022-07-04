@@ -14,7 +14,7 @@ create table t_user
 
 create table t_blog(
   id serial primary key ,
-  user_id bigint not null ,
+  user_id integer not null ,
   title varchar(255) not null ,
   description varchar(255) not null ,
   content text,

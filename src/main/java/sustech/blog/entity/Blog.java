@@ -13,6 +13,8 @@ import java.io.Serializable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import javax.validation.constraints.NotBlank;
+
 @Data
 @EqualsAndHashCode(callSuper = false)
 @TableName("t_blog")
@@ -25,15 +27,17 @@ public class Blog implements Serializable {
     private Integer id;
 
     @TableField("user_id")
-    private Long userId;
+    private Integer userId;
 
     @TableField("title")
+    @NotBlank(message = "The title can not be left empty!")
     private String title;
 
     @TableField("description")
     private String description;
 
     @TableField("content")
+    @NotBlank(message = "The content can not be left empty!")
     private String content;
 
     @TableField("created_time")
