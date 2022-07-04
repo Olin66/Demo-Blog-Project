@@ -28,10 +28,10 @@ public class JwtFilter extends AuthenticatingFilter {
     JwtUtils jwtUtils;
 
     @Override
-    protected AuthenticationToken createToken(ServletRequest servletRequest, ServletResponse servletResponse) {
+    protected AuthenticationToken createToken(ServletRequest servletRequest, ServletResponse servletResponse){
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         String jwt = request.getHeader("Authorization");
-        if (StringUtils.hasText(jwt)) return null;
+        if (ObjectUtils.isEmpty(jwt)) return null;
         return new JwtToken(jwt);
     }
 
@@ -39,11 +39,12 @@ public class JwtFilter extends AuthenticatingFilter {
     protected boolean onAccessDenied(ServletRequest servletRequest, ServletResponse servletResponse) throws Exception {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         String jwt = request.getHeader("Authorization");
-        if (ObjectUtils.isEmpty(jwt)) return true;
-        else {
+        if (ObjectUtils.isEmpty(jwt)) {
+            return true;
+        } else {
             Claims claim = jwtUtils.getClaimByToken(jwt);
             if (claim == null || jwtUtils.isTokenExpired(claim.getExpiration())) {
-                throw new ExpiredCredentialsException("The token is invalid. Please login in again!");
+                throw new ExpiredCredentialsException("token已失效，请重新登录");
             }
             return executeLogin(servletRequest, servletResponse);
         }
@@ -56,8 +57,8 @@ public class JwtFilter extends AuthenticatingFilter {
         String json = JSONUtil.toJsonStr(result);
         try {
             httpServletResponse.getWriter().print(json);
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
         }
         return false;
     }

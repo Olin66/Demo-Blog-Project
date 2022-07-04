@@ -18,14 +18,14 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = ShiroException.class)
     public JsonResult<Exception> handler(ShiroException e) {
         log.error("ShiroException!");
-        return new JsonResult<>(e);
+        return new JsonResult<>(6002, e);
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(value = RuntimeException.class)
     public JsonResult<Exception> handler(RuntimeException e) {
         log.error("RuntimeException!");
-        return new JsonResult<>(e);
+        return new JsonResult<>(6000, e);
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -41,6 +41,6 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = IllegalArgumentException.class)
     public JsonResult<Exception> handler(IllegalArgumentException e) {
         log.error("IllegalArgumentException!");
-        return new JsonResult<>(6000, e);
+        return new JsonResult<>(6003, e);
     }
 }
